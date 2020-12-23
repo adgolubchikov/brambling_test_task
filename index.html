@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+		<link href="style.css" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+	</head>
+	<body>
+		<header>
+<div onclick="setLanguage()"><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+  <input type="radio" id="option-1" class="mdl-radio__button" name="language" value="en">
+  <span class="mdl-radio__label">English</span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+  <input type="radio" id="option-2" class="mdl-radio__button" name="language" value="ru" checked>
+  <span class="mdl-radio__label">Русский</span>
+</label></div>
+		<table>
+		<tr><td id="sort"></td><td id="view"></td></tr>
+		<tr><td>
+		<div onclick="setSortBy()"><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+  <input type="radio" id="option-3" class="mdl-radio__button" name="sortby" value="id" checked>
+  <span class="mdl-radio__label" id="id"></span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-4">
+  <input type="radio" id="option-4" class="mdl-radio__button" name="sortby" value="name">
+  <span class="mdl-radio__label" id="name"></span>
+  </label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-5">
+  <input type="radio" id="option-5" class="mdl-radio__button" name="sortby" value="age">
+  <span class="mdl-radio__label" id="age"></span>
+</label></div>
+
+<div onclick="setSortDirection()"><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-6">
+  <input type="radio" id="option-6" class="mdl-radio__button" name="direction" value="up" checked>
+  <span class="mdl-radio__label" id="up"></span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-7">
+  <input type="radio" id="option-7" class="mdl-radio__button" name="direction" value="down">
+  <span class="mdl-radio__label" id="down"></span>
+</label></div>
+		
+		</td><td>
+		<div onclick="setView()"><label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-8">
+  <input type="radio" id="option-8" class="mdl-radio__button" name="view" value="table" checked>
+  <span class="mdl-radio__label"id="table"></span>
+</label>
+<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-9">
+  <input type="radio" id="option-9" class="mdl-radio__button" name="view" value="preview">
+  <span class="mdl-radio__label" id="preview"></span>
+</label></div>
+		</td></tr>
+		</table>
+		</header>
+		<main></main>
+		<script src="script.js"></script>
+	</body>
+</html>
