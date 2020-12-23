@@ -13,7 +13,7 @@ fetch('http://localhost:8000/data.json').then(response => response.json()).then(
 function renderTable() {
 	document.querySelector('main').innerHTML='';
 	let table = document.createElement('table');
-	table.setAttribute('class', 'mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp');
+	table.setAttribute('class', 'mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp animated');
 	let i;
 	db = customSort();
 	for (i=0;i<db.length;i++) {
@@ -28,7 +28,29 @@ function renderTable() {
 }
 
 function renderPreview() {
+	document.querySelector('main').innerHTML='';
+	let preview = document.createElement('div');
+	preview.setAttribute('class', 'animated');
+	let i;
+	db = customSort();
+	for (i=0;i<db.length;i++) {
+		preview.innerHTML+='<div class="preview"><table><tr><td width="10%"><img width="100%" src="images/'+db[i].image+'.svg" /></td>'+
+		'<td width="80%">'+db[i].name+'</td>'+
+		(db[i].favourite ? '<td width="10%" style="cursor:pointer;" onclick="dislike(this,'+db[i].id+')">&#9733;' : '<td width="10%" style="cursor:pointer;" onclick="like(this,'+db[i].id+')">&#9734;')+'</td>'+
+		'</tr></table><div>'+db[i].age+i18n('years')+'</div><div>'+db[i].phone+'</div><div>'+db[i].phrase+'</div></div>';
+		
+		if (db[i].video !== undefined) {
+			preview.innerHTML+='<div class="preview"><video src="videos/'+db[i].video+'.mp4" controls muted loop preload="none"></video></div>';
+		}
+	}
 	
+	document.querySelector('main').appendChild(preview);
+	
+	let vid = document.querySelectorAll('video');
+	[].forEach.call(vid, function (item) {
+		item.addEventListener('mouseover', hoverVideo, false);
+		item.addEventListener('mouseout', hideVideo, false);
+	});
 }
 
 function renderHeader() {
@@ -59,6 +81,7 @@ const ru = {
 	table: 'Таблица',
 	preview: 'Превью',
 	years: ' лет'};
+
 const en = {
 	sort: 'Sort by',
 	view: 'View',
@@ -145,4 +168,12 @@ function dislike(element, id) {
 	element.innerHTML='&#9734;';
 	element.setAttribute('onclick', 'like(this,'+id+')');
 	db.filter(item => item.id == id)[0].favourite = false;	
+}
+
+function hoverVideo(e) {   
+    this.play();
+}
+
+function hideVideo(e) {
+    this.pause();
 }
