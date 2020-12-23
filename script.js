@@ -19,11 +19,10 @@ function renderTable() {
 	for (i=0;i<db.length;i++) {
 		let tr = document.createElement('tr');
 		tr.innerHTML = '<td><img width="30px" src="images/'+db[i].image+'.svg" /></td><td>'+
-		db[i].name+'</td><td>'+db[i].age+i18n('years')+'</td><td>'+
-		db[i].phone+'</td><td>'+db[i].favourite+'</td>';
+		db[i].name+'</td><td>'+db[i].age+i18n('years')+'</td><td>'+db[i].phone+'</td>'+
+		(db[i].favourite ? '<td style="cursor:pointer;" onclick="dislike(this,'+db[i].id+')">&#9733;' : '<td style="cursor:pointer;" onclick="like(this,'+db[i].id+')">&#9734;')+'</td>';
 		table.appendChild(tr);
 	}
-	
 	
 	document.querySelector('main').appendChild(table);
 }
@@ -73,6 +72,36 @@ const en = {
 	years: ' years'};
 
 function customSort() {
+	if (sortDirection == 'up') {
+		if (sortBy == 'id') {
+			return db.sort((a, b) => a.id - b.id);
+		}
+		if (sortBy == 'name') {
+			return db.sort((a, b) => {
+				if (a.name > b.name) return 1;
+				if (a.name < b.name) return -1;
+				return 0;
+				});
+		}
+		if (sortBy == 'age') {
+			return db.sort((a, b) => a.age - b.age);
+		}
+	}
+	else {
+		if (sortBy == 'id') {
+			return db.sort((a, b) => b.id - a.id);
+		}
+		if (sortBy == 'name') {
+			return db.sort((a, b) => {
+				if (a.name < b.name) return 1;
+				if (a.name > b.name) return -1;
+				return 0;
+				});
+		}
+		if (sortBy == 'age') {
+			return db.sort((a, b) => b.age - a.age);
+		}		
+	}
 	return db;
 }
 
@@ -104,4 +133,16 @@ function setSortBy() {
 function setSortDirection() {
 	sortDirection = document.querySelector('input[name=direction]:checked').value;
 	renderMain();
+}
+
+function like(element, id) {
+	element.innerHTML='&#9733;';
+	element.setAttribute('onclick', 'dislike(this,'+id+')');
+	db.filter(item => item.id == id)[0].favourite = true;
+}
+
+function dislike(element, id) {
+	element.innerHTML='&#9734;';
+	element.setAttribute('onclick', 'like(this,'+id+')');
+	db.filter(item => item.id == id)[0].favourite = false;	
 }

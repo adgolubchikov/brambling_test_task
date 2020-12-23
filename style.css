@@ -1,12 +1,22 @@
-.control {
-
-}
-
-.selected {
-
-}
-
 body {
   max-width: 1000px;
   margin: auto;
+}
+
+main, header, table {
+width: 100%
+}
+
+main > table {
+animation-duration: 0.5s;
+animation-name: creation;
+}
+
+@keyframes creation{
+from {
+margin-left: 100%;
+}
+to {
+margin-left: 0%;
+}
 }
